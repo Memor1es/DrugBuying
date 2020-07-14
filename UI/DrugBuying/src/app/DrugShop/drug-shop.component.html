@@ -1,0 +1,121 @@
+<style>
+    .container {
+        background: black;
+        width: 100%;
+        color: red
+    }
+
+    table {
+        width: 100%;
+    }
+
+    tr {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .buyOption {
+        color: white;
+        margin: 5px;
+    }
+</style>
+
+<div *ngIf="showMenu" style="padding: 100px; background: black; color: white; border: red; border-width: 2px; border-style: solid; border-radius: 20px; ">
+    <div class="row">
+        <div class="col-xs" style="min-width: 200px;">
+            <h1>Drug Dealer</h1>
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Drug Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let drug of drugs">
+                        <th scope="row">{{drug.Name}}</th>
+                        <td>{{drug.Price}}</td>
+                        <td>
+                                <input type="number" (keyup)="drugQtyUpdated($event,drug)" class="form-control" aria-label="Amount (to the nearest dollar)">
+
+                            <!-- <div class="btn-group">
+                                <button class="btn btn-default btn-sm dropdown-toggle btn-success" type="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Buy
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a (click)="addDrug(drug,1)" class="btn btn-success buyOption">Buy 1</a>
+                                    </li>
+                                    <li>
+                                        <a (click)="addDrug(drug,10)" class="btn btn-success buyOption">Buy 10</a>
+                                    </li>
+                                    <li>
+                                        <a (click)="addDrug(drug,20)" class="btn btn-success buyOption">Buy 20</a>
+                                    </li>
+                                    <li>
+                                        <a (click)="addDrug(drug,50)" class="btn btn-success buyOption">Buy 50</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-default btn-sm dropdown-toggle btn-warning" type="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Remove
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a (click)="remove(drug,1)" class="btn btn-warning buyOption">Remove 1</a>
+                                    </li>
+                                    <li>
+                                        <a (click)="remove(drug,10)" class="btn btn-warning buyOption">Remove 10</a>
+                                    </li>
+                                    <li>
+                                        <a (click)="remove(drug,20)" class="btn btn-warning buyOption">Remove 20</a>
+                                    </li>
+                                    <li>
+                                        <a (click)="remove(drug,50)" class="btn btn-warning buyOption">Remove 50</a>
+                                    </li>
+                                </ul>
+                            </div> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs" style="min-width: 200px;">
+            <h2>
+                Basket
+            </h2>
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Drug Name</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let drug of getbasketDetails()">
+                        <th scope="row">{{drug.Name}}</th>
+                        <td>{{drug.BuyQty}}</td>
+                        <td>
+                            ${{drug.Price * drug.BuyQty}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-xs">
+            <button *ngIf="getbasketDetails().length > 0" style="margin-right: 5px;" type="button" (click)="buyDrug()" class="btn btn-success">Buy</button>
+            <button type="button" (click)="close()" class="btn btn-primary">Close</button>
+        </div>
+    </div>
+
+
+</div>
